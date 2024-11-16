@@ -1,0 +1,91 @@
+@use "/src/styles/utils";
+
+.checkout-page {
+    max-width: utils.pxToRem(600px);
+    margin: utils.pxToRem(32px) auto;
+    padding: utils.pxToRem(32px);
+    background-color: #ffffff;
+    border-radius: utils.pxToRem(8px);
+    box-shadow: 0 utils.pxToRem(4px) utils.pxToRem(8px) rgba(0, 0, 0, 0.1);
+
+    .checkout-title {
+        font-size: utils.pxToRem(28.8px);
+        font-weight: 600;
+        color: #333;
+        margin-bottom: utils.pxToRem(24px);
+        text-align: center;
+    }
+
+    .checkout-summary {
+        margin-bottom: utils.pxToRem(32px);
+
+        .summary-title {
+            font-size: utils.pxToRem(24px);
+            color: #555;
+            font-weight: 500;
+            margin-bottom: utils.pxToRem(16px);
+            border-bottom: 1px solid #eee;
+            padding-bottom: utils.pxToRem(8px);
+        }
+
+        .item-list {
+            list-style: none;
+            padding: 0;
+
+            .item {
+                display: flex;
+                justify-content: space-between;
+                padding: utils.pxToRem(12px) 0;
+                border-bottom: 1px solid #f0f0f0;
+
+                .item-name {
+                    font-size: utils.pxToRem(16px);
+                    color: #333;
+                }
+
+                .item-quantity,
+                .item-price {
+                    font-size: utils.pxToRem(14.4px);
+                    color: #666;
+                }
+            }
+        }
+
+        .empty-cart {
+            text-align: center;
+            color: #777;
+            font-size: utils.pxToRem(16px);
+            margin-top: utils.pxToRem(16px);
+        }
+
+        .total-amount {
+            display: flex;
+            justify-content: space-between;
+            font-size: utils.pxToRem(19.2px);
+            font-weight: bold;
+            color: #27ae60;
+            margin-top: utils.pxToRem(24px);
+            padding-top: utils.pxToRem(16px);
+            border-top: 1px solid #eee;
+        }
+    }
+
+    .checkout-button {
+        display: block;
+        width: 100%;
+        padding: utils.pxToRem(12px);
+        font-size: utils.pxToRem(17.6px);
+        font-weight: 600;
+        color: #fff;
+        background-color: #6d07f2;
+        border: none;
+        border-radius: utils.pxToRem(5px);
+        cursor: pointer;
+        transition: background-color 0.3s;
+        text-align: center;
+
+        &:hover {
+            background-color: #6d07f2d7;
+        }
+    }
+}

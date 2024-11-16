@@ -1,0 +1,33 @@
+@use "/src/styles/utils";
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &-container {
+        display: flex;
+        justify-content: center;
+        margin-bottom: utils.pxToRem(24px);
+        width: 100%;
+        max-width: utils.pxToRem(400px);
+        padding: utils.pxToRem(8px);
+        border-radius: utils.pxToRem(5px);
+        border: utils.pxToRem(1px) solid #ddd;
+        font-size: utils.pxToRem(16px);
+    }
+
+    &-input {
+        border: none;
+        width: 90%;
+        &:focus {
+            outline: none;
+            border-color: #007bff;
+        }
+    }
+
+    &-icon {
+        width: utils.pxToRem(25px);
+        margin-right: utils.pxToRem(10px);
+    }
+}

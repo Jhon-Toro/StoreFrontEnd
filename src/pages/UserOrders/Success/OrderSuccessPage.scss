@@ -1,0 +1,70 @@
+@keyframes fadeInScale {
+    0% {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  .order-success-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 90vh;
+    text-align: center;
+    background-color: #f1fdf3;
+    padding: 2rem;
+    animation: fadeInScale 0.5s ease-out;
+  
+    .success-icon-wrapper {
+      background-color: #e6ffed;
+      border-radius: 50%;
+      padding: 1rem;
+      margin-bottom: 1.5rem;
+      animation: fadeInScale 0.5s ease-out;
+    }
+  
+    .success-icon {
+      width: 80px;
+      height: 80px;
+      color: #4caf50;
+      animation: fadeInScale 0.5s ease-out;
+    }
+  
+    h1 {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 1rem;
+      animation: fadeInScale 0.5s ease-out;
+    }
+  
+    p {
+      font-size: 1rem;
+      color: #555;
+      margin-bottom: 2rem;
+      animation: fadeInScale 0.5s ease-out;
+    }
+  
+    .continue-shopping-button {
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #fff;
+      background-color: #4caf50;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      animation: fadeInScale 0.5s ease-out;
+  
+      &:hover {
+        background-color: #388e3c;
+      }
+    }
+  }
+  

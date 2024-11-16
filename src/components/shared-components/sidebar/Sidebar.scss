@@ -1,0 +1,126 @@
+@use 'sass:color';
+@use '/src/styles/utils';
+
+$sidebar-bg: #6D07F2;
+$sidebar-width: utils.pxToRem(250px);
+$sidebar-text-color: white;
+$overlay-bg: rgba(0, 0, 0, 0.5);
+$link-hover-bg: rgba(255, 255, 255, 0.1);
+$button-bg-hover: color.scale($sidebar-bg, $lightness: 10%);
+
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: $overlay-bg;
+  z-index: 50;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+
+  &.show {
+    display: block;
+    opacity: 1;
+  }
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: $sidebar-width;
+  background-color: $sidebar-bg;
+  color: $sidebar-text-color;
+  display: flex;
+  flex-direction: column;
+  padding: utils.pxToRem(20px);
+  gap: utils.pxToRem(20px);
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  z-index: 100;
+
+  &.open {
+    transform: translateX(0);
+  }
+
+  .close-button {
+    align-self: flex-end;
+    background: none;
+    border: none;
+    font-size: utils.pxToRem(24px);
+    color: $sidebar-text-color;
+    cursor: pointer;
+    transition: color 0.3s;
+
+    &:hover {
+      color: $button-bg-hover;
+    }
+  }
+
+  .sidebar-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: utils.pxToRem(12px);
+
+    li {
+      background-color: transparent;
+      border-radius: utils.pxToRem(8px);
+      overflow: hidden;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+
+      &:hover {
+        background-color: $link-hover-bg;
+        transform: translateX(utils.pxToRem(5px));
+      }
+
+      a,
+      button {
+        display: flex;
+        align-items: center;
+        gap: utils.pxToRem(10px);
+        color: $sidebar-text-color;
+        text-decoration: none;
+        font-size: utils.pxToRem(18px);
+        padding: utils.pxToRem(12px) utils.pxToRem(15px);
+        transition: color 0.3s;
+
+        &::before {
+          content: '•';
+          color: color.scale($sidebar-text-color, $lightness: 30%);
+          font-size: utils.pxToRem(12px);
+        }
+
+        &:hover {
+          color: color.scale($sidebar-text-color, $lightness: 15%);
+        }
+      }
+
+      .sidebar-user {
+        font-size: utils.pxToRem(14px);
+        span {
+          display: block;
+          margin-bottom: utils.pxToRem(8px);
+          font-weight: bold;
+        }
+      }
+
+      button {
+        background: none;
+        border: none;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+@media (min-width: 1024px) {
+  .sidebar {
+    display: none;
+  }
+}

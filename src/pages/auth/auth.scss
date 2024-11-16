@@ -1,0 +1,142 @@
+@use "/src/styles/utils";
+
+$form-bg-color: #ffffff;
+$form-border-color: #e0e0e0;
+$form-shadow: 0 utils.pxToRem(4px) utils.pxToRem(12px) rgba(0, 0, 0, 0.1);
+$form-border-radius: utils.pxToRem(8px);
+$form-input-border: #ccc;
+$form-input-focus-border: #6d07f2;
+$form-submit-bg: #6d07f2;
+$form-submit-hover-bg: #6d07f2d7;
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(utils.pxToRem(20px));
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0%,
+    100% {
+        box-shadow: 0 0 0 0 rgba(109, 7, 242, 0.6);
+    }
+    50% {
+        box-shadow: 0 0 0 utils.pxToRem(10px) rgba(109, 7, 242, 0);
+    }
+}
+
+.form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f7f9fc;
+    padding: utils.pxToRem(20px);
+
+    &-container {
+        width: 100%;
+        max-width: utils.pxToRem(400px);
+        background-color: $form-bg-color;
+        border: utils.pxToRem(1px) solid $form-border-color;
+        box-shadow: $form-shadow;
+        border-radius: $form-border-radius;
+        display: flex;
+        flex-direction: column;
+        padding: utils.pxToRem(40px);
+        gap: utils.pxToRem(24px);
+        animation: fadeIn 0.5s ease-in-out;
+
+        &-title {
+            font-size: utils.pxToRem(28px);
+            font-weight: 600;
+            color: #333;
+            text-align: center;
+            animation: fadeIn 1s ease;
+        }
+
+        &-input-error {
+            color: red;
+            font-size: 0.85rem;
+            margin-top: 0.25rem;
+        }
+        &-input {
+            width: 100%;
+            padding: utils.pxToRem(12px);
+            font-size: utils.pxToRem(16px);
+            border: utils.pxToRem(1px) solid $form-input-border;
+            border-radius: utils.pxToRem(4px);
+            transition: border-color 0.2s ease, transform 0.2s ease;
+
+            &:focus {
+                outline: none;
+                border-color: $form-input-focus-border;
+                animation: pulse 1.5s infinite;
+            }
+        }
+
+        &-submit {
+            padding: utils.pxToRem(12px);
+            font-size: utils.pxToRem(16px);
+            font-weight: 600;
+            color: #fff;
+            background-color: $form-submit-bg;
+            border: none;
+            border-radius: utils.pxToRem(4px);
+            cursor: pointer;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+
+            &:hover {
+                background-color: $form-submit-hover-bg;
+                transform: scale(1.05);
+            }
+        }
+    }
+
+    .password-field {
+        position: relative;
+        display: flex;
+        align-items: center;
+
+        .password-toggle {
+            position: absolute;
+            right: utils.pxToRem(10px);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            color: #6d07f2;
+            transition: color 0.3s;
+
+            &:hover {
+                color: #6d07f2d7;
+            }
+
+            svg {
+                width: utils.pxToRem(20px);
+                height: utils.pxToRem(20px);
+            }
+        }
+    }
+
+    &-error {
+        color: red;
+        font-size: utils.pxToRem(14px);
+        text-align: center;
+        animation: fadeIn 0.3s ease-in-out;
+    }
+
+    @media (max-width: 600px) {
+        &-container {
+            padding: utils.pxToRem(20px);
+            gap: utils.pxToRem(16px);
+
+            &-title {
+                font-size: utils.pxToRem(24px);
+            }
+        }
+    }
+}
