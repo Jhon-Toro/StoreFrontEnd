@@ -1,27 +1,27 @@
-import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import axiosInstance from "@api/axiosIntance";
-import { useSelector } from "react-redux";
-import { RootState } from "@store/index";
-import { Product } from "@interfaces/admin/products/edit/products.interface";
-import { Category } from "@interfaces/admin/categories/categories.interface";
-import "./AdminProductEditPage.scss";
+import React, { useEffect, useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import axiosInstance from '@api/axiosIntance';
+import { useSelector } from 'react-redux';
+import { RootState } from '@store/index';
+import { Product } from '@interfaces/admin/products/edit/products.interface';
+import { Category } from '@interfaces/admin/categories/categories.interface';
+import './AdminProductEditPage.scss';
 
 const AdminProductEditPage: React.FC = () => {
     const { id } = useParams<{ id: string }>();
     const [product, setProduct] = useState<Product>({
-        title: "",
-        description: "",
+        title: '',
+        description: '',
         price: 0,
         images: [],
-        category_id: "",
+        category_id: '',
     });
     const [categories, setCategories] = useState<Category[]>([]);
     const token = useSelector((state: RootState) => state.auth.token);
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (id !== "new") {
+        if (id !== 'new') {
             axiosInstance
                 .get(`/products/${id}`, {
                     headers: { Authorization: `Bearer ${token}` },
@@ -33,19 +33,19 @@ const AdminProductEditPage: React.FC = () => {
 
     const fetchCategories = async () => {
         try {
-            const response = await axiosInstance.get("/categories/", {
+            const response = await axiosInstance.get('/categories/', {
                 headers: { Authorization: `Bearer ${token}` },
             });
             setCategories(response.data);
         } catch (error) {
-            console.error("Error fetching categories:", error);
+            console.error('Error fetching categories:', error);
         }
     };
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        if (id === "new") {
-            await axiosInstance.post("/products", product, {
+        if (id === 'new') {
+            await axiosInstance.post('/products/', product, {
                 headers: { Authorization: `Bearer ${token}` },
             });
         } else {
@@ -53,24 +53,16 @@ const AdminProductEditPage: React.FC = () => {
                 headers: { Authorization: `Bearer ${token}` },
             });
         }
-        navigate("/admin/products");
+        navigate('/admin/products');
     };
 
     return (
         <div className="admin-product-edit-page">
-            <h1>{id === "new" ? "Create Product" : "Edit Product"}</h1>
+            <h1>{id === 'new' ? 'Create Product' : 'Edit Product'}</h1>
             <form onSubmit={handleSubmit} className="product-form">
                 <label className="form-label">
                     Title
-                    <input
-                        type="text"
-                        value={product.title}
-                        onChange={(e) =>
-                            setProduct({ ...product, title: e.target.value })
-                        }
-                        placeholder="Enter product title"
-                        className="form-input"
-                    />
+                    <input type="text" value={product.title} onChange={(e) => setProduct({ ...product, title: e.target.value })} placeholder="Enter product title" className="form-input" />
                 </label>
                 <label className="form-label">
                     Description
@@ -123,15 +115,7 @@ const AdminProductEditPage: React.FC = () => {
                 </label>
                 <label className="form-label">
                     Image URL
-                    <input
-                        type="text"
-                        value={product.images[0] || ""}
-                        onChange={(e) =>
-                            setProduct({ ...product, images: [e.target.value] })
-                        }
-                        placeholder="Enter image URL"
-                        className="form-input"
-                    />
+                    <input type="text" value={product.images[0] || ''} onChange={(e) => setProduct({ ...product, images: [e.target.value] })} placeholder="Enter image URL" className="form-input" />
                 </label>
                 <button type="submit" className="save-button">
                     Save
