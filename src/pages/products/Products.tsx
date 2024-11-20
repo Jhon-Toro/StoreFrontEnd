@@ -28,7 +28,7 @@ const Products = () => {
     const getProducts = () => {
         const fetchProducts = async () => {
             try {
-                const response = await axiosInstance.get(`/products`);
+                const response = await axiosInstance.get(`/products/`);
                 setProducts(response.data);
                 setFilteredProducts(response.data);
             } catch (error) {
