@@ -7,15 +7,14 @@ const banners: Banner[] = [
     {
         id: '1',
         title: 'Nuevas Gorras',
-        imageUrl:
-            'https://neweraco.vtexassets.com/assets/vtex.file-manager-graphql/images/1f5d1848-d986-4d33-9b97-8dbe2ceeae63___9fab8936d32a498a2488d18b58f7500c.jpg',
-        link: '/categories/category/10/products',
+        imageUrl: 'https://neweraco.vtexassets.com/assets/vtex.file-manager-graphql/images/1f5d1848-d986-4d33-9b97-8dbe2ceeae63___9fab8936d32a498a2488d18b58f7500c.jpg',
+        link: '/categories/category/5/products',
     },
     {
         id: '2',
         title: 'Nuevas Camisetas',
         imageUrl: 'https://dynamobrand.co/cdn/shop/files/BANNER-01-NEW-MERCH-HOR.jpg?v=1730496817&width=1880',
-        link: '/categories/category/16/products',
+        link: '/categories/category/1/products',
     },
 ];
 
@@ -52,27 +51,19 @@ const ProductSlider: React.FC = () => {
 
     return (
         <div className="product-slider" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-            <div className="slider-container">
+            <div className="product-slider-container">
                 {banners.map((banner, index) => (
-                    <Link
-                        key={banner.id}
-                        to={banner.link}
-                        className={`slider-item ${index === currentBanner ? 'fade' : ''}`}
-                    >
-                        <img src={banner.imageUrl} alt={banner.title} className="slider-image" />
-                        <div className="slider-overlay">
+                    <Link key={banner.id} to={banner.link} className={`product-slider-item ${index === currentBanner ? 'fade' : ''}`}>
+                        <img src={banner.imageUrl} alt={banner.title} className="product-slider-item-image" />
+                        <div className="product-slider-item-overlay">
                             <h2>{banner.title}</h2>
                         </div>
                     </Link>
                 ))}
 
-                <div className="slider-dots">
+                <div className="product-slider-dots">
                     {banners.map((_, index) => (
-                        <span
-                            key={index}
-                            className={`dot ${index === currentBanner ? 'active' : ''}`}
-                            onClick={() => handleDotClick(index)}
-                        />
+                        <span key={index} className={`product-slider-dots-dot ${index === currentBanner ? 'active' : ''}`} onClick={() => handleDotClick(index)} />
                     ))}
                 </div>
             </div>

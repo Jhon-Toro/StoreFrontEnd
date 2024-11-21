@@ -1,4 +1,4 @@
-@use "/src/styles/utils";
+@use '/src/styles/utils';
 
 @keyframes pulse {
     0%,
@@ -72,8 +72,7 @@
 
         &:hover {
             transform: translateY(utils.pxToRem(-5px));
-            box-shadow: 0 utils.pxToRem(8px) utils.pxToRem(16px)
-                rgba(0, 0, 0, 0.2);
+            box-shadow: 0 utils.pxToRem(8px) utils.pxToRem(16px) rgba(0, 0, 0, 0.2);
         }
 
         .category-link {

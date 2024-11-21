@@ -1,15 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import axiosInstance from "../../api/axiosIntance";
-import { useDispatch } from "react-redux";
-import { addToCart } from "../../store/slices/cartSlice";
-import {
-    StarIcon as SolidStarIcon,
-    UserCircleIcon,
-} from "@heroicons/react/24/solid";
-import { StarIcon as OutlineStarIcon } from "@heroicons/react/24/outline";
-import "./ProductDetailPage.scss";
-import CartIcon from "@shared-components/cart-icon/CartIcon";
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import axiosInstance from '../../api/axiosIntance';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../../store/slices/cartSlice';
+import { StarIcon as SolidStarIcon, UserCircleIcon } from '@heroicons/react/24/solid';
+import { StarIcon as OutlineStarIcon } from '@heroicons/react/24/outline';
+import './ProductDetailPage.scss';
+import CartIcon from '@shared-components/cart-icon/CartIcon';
 
 interface Review {
     id: number;
@@ -32,23 +29,21 @@ interface Product {
 
 const ProductDetailPage: React.FC = () => {
     const [product, setProduct] = useState<Product | null>(null);
-    const [newComment, setNewComment] = useState("");
+    const [newComment, setNewComment] = useState('');
     const [newRating, setNewRating] = useState<number>(5);
     const { productId } = useParams<{ productId: string }>();
     const dispatch = useDispatch();
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const [mainImage, setMainImage] = useState("");
+    const [mainImage, setMainImage] = useState('');
 
     useEffect(() => {
         const fetchProduct = async () => {
             try {
-                const response = await axiosInstance.get(
-                    `/products/${productId}`
-                );
+                const response = await axiosInstance.get(`/products/${productId}`);
                 setProduct(response.data);
                 setMainImage(response.data.images[0]);
             } catch (error) {
-                console.error("Error fetching product details:", error);
+                console.error('Error fetching product details:', error);
             }
         };
         fetchProduct();
@@ -71,7 +66,7 @@ const ProductDetailPage: React.FC = () => {
         if (isSubmitting) return;
         setIsSubmitting(true);
         try {
-            const response = await axiosInstance.post("/reviews", {
+            const response = await axiosInstance.post('/reviews/', {
                 rating: newRating,
                 comment: newComment,
                 product_id: Number(productId),
@@ -84,10 +79,10 @@ const ProductDetailPage: React.FC = () => {
                       }
                     : null
             );
-            setNewComment("");
+            setNewComment('');
             setNewRating(5);
         } catch (error) {
-            console.error("Error adding review:", error);
+            console.error('Error adding review:', error);
         } finally {
             setIsSubmitting(false);
         }
@@ -108,15 +103,10 @@ const ProductDetailPage: React.FC = () => {
                             <div className="product-images">
                                 <div className="main-image">
                                     <img
-                                        src={
-                                            mainImage && mainImage.length > 0
-                                                ? mainImage
-                                                : "https://www.shutterstock.com/image-vector/no-photo-image-viewer-thumbnail-600nw-2495883211.jpg"
-                                        }
+                                        src={mainImage && mainImage.length > 0 ? mainImage : 'https://www.shutterstock.com/image-vector/no-photo-image-viewer-thumbnail-600nw-2495883211.jpg'}
                                         alt={product.title}
                                         onError={(e) => {
-                                            (e.target as HTMLImageElement).src =
-                                                "https://www.shutterstock.com/image-vector/no-photo-image-viewer-thumbnail-600nw-2495883211.jpg";
+                                            (e.target as HTMLImageElement).src = 'https://www.shutterstock.com/image-vector/no-photo-image-viewer-thumbnail-600nw-2495883211.jpg';
                                         }}
                                     />
                                 </div>
@@ -124,26 +114,13 @@ const ProductDetailPage: React.FC = () => {
                                     {product.images.map((image, index) => (
                                         <img
                                             key={index}
-                                            src={
-                                                image && image.length > 0
-                                                    ? image
-                                                    : "https://www.shutterstock.com/image-vector/no-photo-image-viewer-thumbnail-600nw-2495883211.jpg"
-                                            }
+                                            src={image && image.length > 0 ? image : 'https://www.shutterstock.com/image-vector/no-photo-image-viewer-thumbnail-600nw-2495883211.jpg'}
                                             alt={`Thumbnail ${index}`}
                                             onError={(e) => {
-                                                (
-                                                    e.target as HTMLImageElement
-                                                ).src =
-                                                    "https://www.shutterstock.com/image-vector/no-photo-image-viewer-thumbnail-600nw-2495883211.jpg";
+                                                (e.target as HTMLImageElement).src = 'https://www.shutterstock.com/image-vector/no-photo-image-viewer-thumbnail-600nw-2495883211.jpg';
                                             }}
-                                            onClick={() =>
-                                                handleImageClick(image)
-                                            }
-                                            className={
-                                                mainImage === image
-                                                    ? "selected"
-                                                    : ""
-                                            }
+                                            onClick={() => handleImageClick(image)}
+                                            className={mainImage === image ? 'selected' : ''}
                                         />
                                     ))}
                                 </div>
@@ -152,37 +129,16 @@ const ProductDetailPage: React.FC = () => {
                             <div className="product-info">
                                 <div className="product-header">
                                     <h1>{product.title}</h1>
-                                    <p className="price">
-                                        Price: ${product.price}
-                                    </p>
+                                    <p className="price">Price: ${product.price}</p>
                                     <div className="rating">
                                         {Array.from({ length: 5 }, (_, i) => (
-                                            <SolidStarIcon
-                                                key={i}
-                                                className={`star-icon ${
-                                                    i <
-                                                    (product.average_rating ||
-                                                        0)
-                                                        ? "filled"
-                                                        : ""
-                                                }`}
-                                            />
+                                            <SolidStarIcon key={i} className={`star-icon ${i < (product.average_rating || 0) ? 'filled' : ''}`} />
                                         ))}
-                                        <span className="average-rating">
-                                            (
-                                            {product.average_rating ||
-                                                "No ratings yet"}
-                                            )
-                                        </span>
+                                        <span className="average-rating">({product.average_rating || 'No ratings yet'})</span>
                                     </div>
                                 </div>
-                                <p className="description">
-                                    {product.description}
-                                </p>
-                                <button
-                                    onClick={handleAddToCart}
-                                    className="add-to-cart"
-                                >
+                                <p className="description">{product.description}</p>
+                                <button onClick={handleAddToCart} className="add-to-cart">
                                     Add to Cart
                                 </button>
                             </div>
@@ -198,41 +154,21 @@ const ProductDetailPage: React.FC = () => {
                                         <div className="review-header">
                                             <UserCircleIcon className="user-icon" />
                                             <div className="user-info">
-                                                <p className="username">
-                                                    {review.username}
-                                                </p>
-                                                <p className="timestamp">
-                                                    {new Date(
-                                                        review.created_at
-                                                    ).toLocaleString()}
-                                                </p>
+                                                <p className="username">{review.username}</p>
+                                                <p className="timestamp">{new Date(review.created_at).toLocaleString()}</p>
                                             </div>
                                         </div>
                                         <div className="rating">
-                                            {Array.from(
-                                                { length: 5 },
-                                                (_, i) => (
-                                                    <SolidStarIcon
-                                                        key={i}
-                                                        className={`star-icon ${
-                                                            i < review.rating
-                                                                ? "filled"
-                                                                : ""
-                                                        }`}
-                                                    />
-                                                )
-                                            )}
+                                            {Array.from({ length: 5 }, (_, i) => (
+                                                <SolidStarIcon key={i} className={`star-icon ${i < review.rating ? 'filled' : ''}`} />
+                                            ))}
                                         </div>
-                                        <p className="comment">
-                                            {review.comment}
-                                        </p>
+                                        <p className="comment">{review.comment}</p>
                                     </li>
                                 ))}
                             </ul>
                         ) : (
-                            <p className="no-reviews">
-                                No hay reseñas de momento.
-                            </p>
+                            <p className="no-reviews">No hay reseñas de momento.</p>
                         )}
 
                         <div className="add-review">
@@ -240,32 +176,17 @@ const ProductDetailPage: React.FC = () => {
                             <form onSubmit={handleAddReview}>
                                 <div className="star-selector">
                                     {Array.from({ length: 5 }, (_, i) => (
-                                        <button
-                                            key={i}
-                                            type="button"
-                                            onClick={() => setNewRating(i + 1)}
-                                            className="star-button"
-                                        >
-                                            {i < newRating ? (
-                                                <SolidStarIcon className="star-icon filled" />
-                                            ) : (
-                                                <OutlineStarIcon className="star-icon" />
-                                            )}
+                                        <button key={i} type="button" onClick={() => setNewRating(i + 1)} className="star-button">
+                                            {i < newRating ? <SolidStarIcon className="star-icon filled" /> : <OutlineStarIcon className="star-icon" />}
                                         </button>
                                     ))}
                                 </div>
                                 <label>
                                     Comentario:
-                                    <textarea
-                                        value={newComment}
-                                        onChange={(e) =>
-                                            setNewComment(e.target.value)
-                                        }
-                                        required
-                                    />
+                                    <textarea value={newComment} onChange={(e) => setNewComment(e.target.value)} required />
                                 </label>
                                 <button type="submit" disabled={isSubmitting}>
-                                    {isSubmitting ? "Submitting..." : "Enviar"}
+                                    {isSubmitting ? 'Submitting...' : 'Enviar'}
                                 </button>
                             </form>
                         </div>

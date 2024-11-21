@@ -21,6 +21,7 @@ import AdminProductsPage from '@pages/admin/Products/AdminProductsPage';
 import AdminProductEditPage from '@pages/admin/Products/Edit/AdminProductEditPage';
 import { useSelector } from 'react-redux';
 import { RootState } from '@store/index';
+import Contact from '@pages/contact/Contact';
 
 const PrivateRoute = ({ children }: { children: JSX.Element }) => {
     const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
@@ -41,6 +42,7 @@ const AppRoutes = ({ isAuthenticated }: { isAuthenticated: boolean }) => {
                     </PrivateRoute>
                 }
             />
+            <Route path="/Contact" element={<Contact />} />
             <Route
                 path="/product/:productId"
                 element={
