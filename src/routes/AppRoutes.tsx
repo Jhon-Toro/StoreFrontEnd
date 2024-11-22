@@ -22,6 +22,7 @@ import AdminProductEditPage from '@pages/admin/Products/Edit/AdminProductEditPag
 import { useSelector } from 'react-redux';
 import { RootState } from '@store/index';
 import Contact from '@pages/contact/Contact';
+import AboutUs from '@pages/about/AboutUs';
 
 const PrivateRoute = ({ children }: { children: JSX.Element }) => {
     const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
@@ -34,6 +35,7 @@ const AppRoutes = ({ isAuthenticated }: { isAuthenticated: boolean }) => {
             <Route path="/" element={<Products />} />
             <Route path="/categories" element={<CategoriesPage />} />
             <Route path="/products" element={<Products />} />
+            <Route path="/ours" element={<AboutUs />} />
             <Route
                 path="/categories/category/:categoryId/products"
                 element={

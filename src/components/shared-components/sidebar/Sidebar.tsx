@@ -45,6 +45,11 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
                         </Link>
                     </li>
                     <li>
+                        <Link to="/ours" onClick={onClose}>
+                            Nosotros
+                        </Link>
+                    </li>
+                    <li>
                         <Link to="/products" onClick={onClose}>
                             Productos
                         </Link>
