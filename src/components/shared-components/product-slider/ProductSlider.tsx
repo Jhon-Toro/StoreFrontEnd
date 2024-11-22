@@ -16,6 +16,18 @@ const banners: Banner[] = [
         imageUrl: 'https://dynamobrand.co/cdn/shop/files/BANNER-01-NEW-MERCH-HOR.jpg?v=1730496817&width=1880',
         link: '/categories/category/1/products',
     },
+    {
+        id: '3',
+        title: 'Nuevos nike',
+        imageUrl: 'https://wallpapers.com/images/hd/cool-nike-shoe-ft6gor5zjwt950u2.jpg',
+        link: '/categories/category/2/products',
+    },
+    {
+        id: '4',
+        title: 'Nueva linea exclusiva nike',
+        imageUrl: 'https://media.revistagq.com/photos/63032d7b925bf4b54a3034e3/16:9/w_2560%2Cc_limit/nike-lede-full.jpg',
+        link: '/categories/category/2/products',
+    },
 ];
 
 const ProductSlider: React.FC = () => {
