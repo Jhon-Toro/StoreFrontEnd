@@ -1,6 +1,6 @@
 import React from 'react';
 import { UserGroupIcon, CubeIcon, PhoneIcon, StarIcon, GlobeAltIcon } from '@heroicons/react/24/solid';
-import './AboutUs.scss';
+import './AboutUS.scss';
 
 const AboutUs: React.FC = () => {
     return (

@@ -8,6 +8,7 @@ import axiosInstance from '@api/axiosIntance';
 import Pagination from '@shared-components/pagination/Pagination';
 import './Products.scss';
 import ProductSlider from '@shared-components/product-slider/ProductSlider';
+import { Link } from 'react-router-dom';
 
 const Products = () => {
     const [products, setProducts] = useState<Product[]>([]);
@@ -92,9 +93,9 @@ const Products = () => {
                 {filteredProducts.length > 0 ? (
                     filteredProducts.map((product) => (
                         <div key={product.id} className="product-card">
-                            <div className="product-image">
+                            <Link to={`/product/${product.id}`} className="product-image">
                                 <img src={product.images && product.images.length > 0 ? product.images[0] : 'https://via.placeholder.com/200'} alt={product.title} />
-                            </div>
+                            </Link>
                             <div className="product-details">
                                 <h3>{product.title}</h3>
                                 <p className="product-price">Precio: ${product.price}</p>
